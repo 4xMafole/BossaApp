@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="greenish_light">#02D1BE</color>
+    <color name="reddish_main" />
+    <color name="reddish_light">#F44336</color>
+</resources>
