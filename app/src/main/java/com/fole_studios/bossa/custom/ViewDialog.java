@@ -3,6 +3,7 @@ package com.fole_studios.bossa.custom;
 import android.app.Dialog;
 import android.content.Context;
 import android.text.TextUtils;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
@@ -13,17 +14,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fole_studios.bossa.R;
 import com.fole_studios.bossa.adapters.ProductAdapter;
+import com.fole_studios.bossa.database.DBManager;
 import com.fole_studios.bossa.models.Product;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static com.fole_studios.bossa.animation.CustomAnimation.fadeInVisible;
+
 public class ViewDialog
 {
     Dialog _dialog;
 
-    public void showAddProduct(Context context, RecyclerView recyclerView, ProductAdapter adapter, ArrayList<Product> productArrayList)
+    public void showAddProduct(Context context, int transactionId,  DBManager dbManager, RecyclerView recyclerView, ProductAdapter adapter, ArrayList<Product> productArrayList, TextView noProductText)
     {
         startDialog(context, R.layout.add_product);
 
@@ -34,15 +38,32 @@ public class ViewDialog
 
         _submitButton.setOnClickListener(view ->
         {
-                if(TextUtils.isEmpty(_productName.getText()) || TextUtils.isEmpty(_productSold.getText()) || TextUtils.isEmpty(_productCost.getText()))
-                {
-                    Toast.makeText(context, "Fill the details", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                productArrayList.add(new Product(Objects.requireNonNull(_productName.getText()).toString(), Integer.parseInt(Objects.requireNonNull(_productSold.getText()).toString()), Objects.requireNonNull(_productCost.getText()).toString()));
-                adapter.notifyDataSetChanged();
-                recyclerView.setAdapter(adapter);
-            _dialog.dismiss();
+            if(TextUtils.isEmpty(_productName.getText()) || TextUtils.isEmpty(_productSold.getText()) || TextUtils.isEmpty(_productCost.getText()))
+            {
+                Toast.makeText(context, "Fill the details", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            String _proName = Objects.requireNonNull(_productName.getText()).toString();
+            int _proSold = Integer.parseInt(Objects.requireNonNull(_productSold.getText()).toString());
+            int _proCost = Integer.parseInt(Objects.requireNonNull(_productCost.getText()).toString());
+
+            productArrayList.add(new Product(_proName, _proSold, _proCost));
+            dbManager.insertProduct(_proName, transactionId,_proSold, _proCost);
+            adapter.notifyDataSetChanged();
+            recyclerView.setAdapter(adapter);
+
+            if(!(adapter.getItemCount() > 0))
+            {
+                recyclerView.setVisibility(View.GONE);
+                fadeInVisible(noProductText);
+            }
+            else
+            {
+                noProductText.setVisibility(View.GONE);
+                fadeInVisible(recyclerView);
+            }
+                _dialog.dismiss();
         });
 
         endDialog();

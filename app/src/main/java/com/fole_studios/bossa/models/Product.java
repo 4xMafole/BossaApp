@@ -4,9 +4,9 @@ public class Product
 {
     private String _productName;
     private int _productSold;
-    private String _productCost;
+    private int _productCost;
 
-    public Product(String productName, int productSold, String productCost)
+    public Product(String productName, int productSold, int productCost)
     {
         _productName = productName;
         _productSold = productSold;
@@ -33,12 +33,12 @@ public class Product
         _productSold = productSold;
     }
 
-    public String getProductCost()
+    public int getProductCost()
     {
         return _productCost;
     }
 
-    public void setProductCost(String productCost)
+    public void setProductCost(int productCost)
     {
         _productCost = productCost;
     }

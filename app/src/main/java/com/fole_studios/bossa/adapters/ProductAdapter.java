@@ -60,7 +60,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
         }
 
-        public void setData(String productName, int productSold, String productCost)
+        public void setData(String productName, int productSold, int productCost)
         {
             _productName.setText(productName);
             _productSold.setText(String.valueOf(productSold));
