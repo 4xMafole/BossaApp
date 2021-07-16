@@ -1,5 +1,6 @@
 package com.fole_studios.bossa.Employee;
 
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,9 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.fole_studios.bossa.R;
 import com.fole_studios.bossa.adapters.TransactionAdapter;
+import com.fole_studios.bossa.animation.CustomAnimation;
+import com.fole_studios.bossa.database.DBManager;
 import com.fole_studios.bossa.models.Transaction;
 
 import java.util.ArrayList;
@@ -35,6 +39,10 @@ public class ETransactionFragment extends Fragment
     private RecyclerView _recyclerView;
     private ArrayList<Transaction> _transactionArrayList;
     private TransactionAdapter _adapter;
+    private DBManager _dbManager;
+    private Cursor _cursorTransaction;
+    private TextView _noTransactionText;
+    private TextView _transactionNum;
 
     public ETransactionFragment()
     {
@@ -78,10 +86,21 @@ public class ETransactionFragment extends Fragment
         View _view = inflater.inflate(R.layout.fragment_e_transaction, container, false);
 
         _recyclerView = _view.findViewById(R.id.e_trans_recyclerview);
+        _noTransactionText = _view.findViewById(R.id.e_trans_no_trans_text);
+        _transactionNum = _view.findViewById(R.id.e_trans_transaction);
 
+        initDatabase();
         initRecyclerview();
 
+
         return _view;
+    }
+
+    private void initDatabase()
+    {
+        _dbManager = new DBManager(getContext());
+        _dbManager.open();
+        _cursorTransaction = _dbManager.fetchTransaction();
     }
 
     private void initRecyclerview()
@@ -91,17 +110,31 @@ public class ETransactionFragment extends Fragment
         _recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         _recyclerView.setAdapter(_adapter);
         _adapter.notifyDataSetChanged();
+
+        _transactionNum.setText(String.valueOf(_adapter.getItemCount()));
+
+        if(!(_adapter.getItemCount() > 0))
+        {
+            CustomAnimation.transUpVisible(_noTransactionText);
+        }
+        else
+        {
+            _noTransactionText.setVisibility(View.GONE);
+        }
     }
 
     private void transactionData()
     {
         _transactionArrayList = new ArrayList<>();
 
-        for (int i = 0; i < 2; i++)
+        if(_cursorTransaction.getCount() > 0)
         {
-            _transactionArrayList.add(new Transaction("Transaction: " + "5432" + i, "Confirmed"));
-            _transactionArrayList.add(new Transaction("Transaction: " + "43822" + i * i, "Confirmed"));
-            _transactionArrayList.add(new Transaction("Transaction: " + "391" + i + i, "Confirmed"));
+            do
+            {
+                _cursorTransaction.getString(Integer.parseInt(_cursorTransaction.getString(0)));
+                _cursorTransaction.getString(3);
+                _transactionArrayList.add(new Transaction(_cursorTransaction.getString(Integer.parseInt(_cursorTransaction.getString(0))), _cursorTransaction.getString(3)));
+            }while(_cursorTransaction.moveToNext());
         }
     }
 }

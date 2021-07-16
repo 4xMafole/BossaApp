@@ -2,9 +2,12 @@ package com.fole_studios.bossa.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.fole_studios.bossa.auth.SaveSharedPrefs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +59,29 @@ public class DBManager
         _database.insert(DatabaseHelper.TABLE_NAME_TRANSACTION, null, _contentValues);
     }
 
+    public void insertEmployee(String employeeName, String phoneNumber, String email, String storeName, int storeId)
+    {
+        ContentValues _contentValues = new ContentValues();
+        _contentValues.put(DatabaseHelper.COLUMN_EMPLOYEE_NAME, employeeName);
+        _contentValues.put(DatabaseHelper.COLUMN_EMPLOYEE_PHONE, phoneNumber);
+        _contentValues.put(DatabaseHelper.COLUMN_EMPLOYEE_EMAIL, email);
+        _contentValues.put(DatabaseHelper.COLUMN_EMPLOYEE_STORE, storeName);
+        _contentValues.put(DatabaseHelper.COLUMN_EMPLOYEE_STORE_ID, storeId);
+
+        _database.insert(DatabaseHelper.TABLE_NAME_EMPLOYEE, null, _contentValues);
+    }
+
+    public Cursor fetchCurrentEmployee(String phoneNumber)
+    {
+        Cursor _cursor = _database.rawQuery("SELECT * FROM " + DatabaseHelper.TABLE_NAME_EMPLOYEE + " WHERE " + DatabaseHelper.COLUMN_EMPLOYEE_PHONE + " = '" + phoneNumber + "'", null);
+
+        if(_cursor != null)
+        {
+            _cursor.moveToFirst();
+        }
+        return _cursor;
+    }
+
     public Cursor fetchTransaction()
     {
         String[] _columns = new String[] {DatabaseHelper.COLUMN_TRANSACTION_ID, DatabaseHelper.COLUMN_TRANSACTION_TOTAL,
@@ -105,16 +131,24 @@ public class DBManager
     }
 
     //TODO: future use
-/*
-    public int update(long productId, String productName, int productSold, int productPrice)
+    public void updateEmployee(String phoneNumber, int storeId)
+    {
+        SaveSharedPrefs.setPhoneNumber(_context, phoneNumber);
+        ContentValues _contentValues = new ContentValues();
+        _contentValues.put(DatabaseHelper.COLUMN_EMPLOYEE_PHONE, phoneNumber);
+        _contentValues.put(DatabaseHelper.COLUMN_EMPLOYEE_STORE_ID, storeId);
+
+        _database.update(DatabaseHelper.TABLE_NAME_EMPLOYEE, _contentValues, DatabaseHelper.COLUMN_EMPLOYEE_PHONE + " = " + phoneNumber, null);
+    }
+
+    public int updateProduct(long productId, String productName, int productSold, int productPrice)
     {
         ContentValues _contentValues = new ContentValues();
         _contentValues.put(DatabaseHelper.COLUMN_PRODUCT_NAME, productName);
         _contentValues.put(DatabaseHelper.COLUMN_PRODUCT_SOLD, productSold);
         _contentValues.put(DatabaseHelper.COLUMN_PRODUCT_PRICE, productPrice);
-        return _database.update(DatabaseHelper.TABLE_NAME, _contentValues, DatabaseHelper.COLUMN_PRODUCT_ID + " = " + productId, null);
+        return _database.update(DatabaseHelper.TABLE_NAME_PRODUCT, _contentValues, DatabaseHelper.COLUMN_PRODUCT_ID + " = " + productId, null);
     }
-*/
 
     public void deleteProduct(long productId)
     {

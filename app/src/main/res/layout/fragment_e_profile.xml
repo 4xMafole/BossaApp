@@ -60,7 +60,7 @@
                 android:layout_weight="1">
 
                 <ImageView
-                    android:id="@+id/e_phone_icon"
+                    android:id="@+id/e_profile_phone_icon"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:src="@drawable/ic_baseline_phone_android_24"
@@ -70,7 +70,7 @@
                     app:tint="@color/purple_text" />
 
                 <TextView
-                    android:id="@+id/e_phone_number"
+                    android:id="@+id/e_profile_phone_number"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -79,10 +79,10 @@
                     android:text="0743809705"
                     android:textColor="@color/white"
                     android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/e_phone_icon"
+                    app:layout_constraintBottom_toBottomOf="@+id/e_profile_phone_icon"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/e_phone_icon"
-                    app:layout_constraintTop_toTopOf="@+id/e_phone_icon" />
+                    app:layout_constraintStart_toEndOf="@+id/e_profile_phone_icon"
+                    app:layout_constraintTop_toTopOf="@+id/e_profile_phone_icon" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -173,7 +173,7 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/e_profile_logout"
+        android:id="@+id/e_profile_logout_button"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

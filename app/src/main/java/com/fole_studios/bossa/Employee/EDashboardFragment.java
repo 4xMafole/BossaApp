@@ -15,10 +15,14 @@ import android.widget.Toast;
 
 import com.fole_studios.bossa.R;
 import com.fole_studios.bossa.adapters.ProductAdapter;
+import com.fole_studios.bossa.background.beem.OTP;
+import com.fole_studios.bossa.background.beem.OTPDataTask;
 import com.fole_studios.bossa.custom.ViewDialog;
 import com.fole_studios.bossa.database.DBManager;
 import com.fole_studios.bossa.models.Product;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -55,6 +59,7 @@ public class EDashboardFragment extends Fragment
     private int _totalSold;
     private int _newTransID;
     private int _queriedTransactionID;
+    private String _otpPinId;
 
     public EDashboardFragment()
     {
@@ -116,6 +121,8 @@ public class EDashboardFragment extends Fragment
 
         return _view;
     }
+
+
 
     private void initDatabase()
     {
@@ -210,9 +217,6 @@ public class EDashboardFragment extends Fragment
 
             if(_dbManager.fetchLatestTransaction(_queriedTransactionID).getCount() != 0)
             {
-//                _cursorTransaction = _dbManager.fetchLatestTransaction(queriedTransactionID);
-
-                //This transaction is present so don't display it.
                 _newTransID = _queriedTransactionID + 1;
             }
             else

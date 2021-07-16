@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.fole_studios.bossa.Employee.EMainActivity;
 import com.fole_studios.bossa.adapters.ViewPagerAdapter;
+import com.fole_studios.bossa.auth.SaveSharedPrefs;
 import com.google.android.material.tabs.TabLayout;
 
 public class AuthActivity extends AppCompatActivity
@@ -22,6 +25,13 @@ public class AuthActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
+
+        if(SaveSharedPrefs.getLoggedStatus(getApplicationContext()))
+        {
+            Intent _intent = new Intent(getApplicationContext(), EMainActivity.class);
+            startActivity(_intent);
+            finish();
+        }
 
         viewPager = findViewById(R.id.view_pager);
         tabLayout = findViewById(R.id.tab_layout);

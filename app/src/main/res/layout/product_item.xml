@@ -39,7 +39,7 @@
                 android:id="@+id/product_sold_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ngapi:"
+                android:text="sold:"
                 android:textColor="@color/purple_text"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/product_name"

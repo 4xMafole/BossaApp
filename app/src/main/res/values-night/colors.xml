@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="purple_main">#5E5274</color>
+    <color name="purple_light">#8067AC</color>
+    <color name="purple_background">#5B516D</color>
+    <color name="purple_text">#A69DB7</color>
+    <color name="purple_card">#706486</color>
+    <color name="greenish_main">#009688</color>
     <color name="greenish_light">#02D1BE</color>
-    <color name="reddish_main" />
+    <color name="reddish_main">#FFB21919</color>
     <color name="reddish_light">#F44336</color>
 </resources>

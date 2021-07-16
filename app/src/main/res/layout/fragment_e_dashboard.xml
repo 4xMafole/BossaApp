@@ -53,7 +53,7 @@
                 android:id="@+id/e_dash_no_product_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="No product sold"
+                android:text="Add sold product"
                 android:textColor="@color/purple_text"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="@+id/frameLayout3"
