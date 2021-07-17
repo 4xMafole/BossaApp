@@ -145,7 +145,8 @@ public class EDashboardFragment extends Fragment
         _addButton.setOnClickListener(view ->
         {
             ViewDialog _dialog = new ViewDialog();
-             _dialog.showAddProduct(getContext(), _newTransID, _dbManager, _recyclerView, _adapter, _productArrayList, _noProductText);
+             _dialog.showAddProduct(getContext(), _newTransID, _dbManager, _recyclerView, _adapter,
+                     _productArrayList, _noProductText, _transTotalSold, _transTotalAmount, _totalSold, _totalAmount);
         });
     }
 

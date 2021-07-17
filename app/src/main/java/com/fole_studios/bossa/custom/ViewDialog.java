@@ -27,8 +27,11 @@ import static com.fole_studios.bossa.animation.CustomAnimation.fadeInVisible;
 public class ViewDialog
 {
     Dialog _dialog;
+    int _proSold = 0, _proCost = 0;
 
-    public void showAddProduct(Context context, int transactionId,  DBManager dbManager, RecyclerView recyclerView, ProductAdapter adapter, ArrayList<Product> productArrayList, TextView noProductText)
+    public void showAddProduct(Context context, int transactionId,  DBManager dbManager, RecyclerView recyclerView,
+                               ProductAdapter adapter, ArrayList<Product> productArrayList, TextView noProductText,
+                               TextView productSoldtText, TextView productTotalAmount, int productSold, int productAmount)
     {
         startDialog(context, R.layout.add_product);
 
@@ -36,6 +39,9 @@ public class ViewDialog
         TextInputEditText _productSold = _dialog.findViewById(R.id.ad_product_sold);
         TextInputEditText _productCost = _dialog.findViewById(R.id.ad_product_cost);
         Button _submitButton = _dialog.findViewById(R.id.ad_product_submit);
+
+        _proSold += productSold;
+        _proCost += productAmount;
 
         _submitButton.setOnClickListener(view ->
         {
@@ -46,11 +52,16 @@ public class ViewDialog
             }
 
             String _proName = Objects.requireNonNull(_productName.getText()).toString();
-            int _proSold = Integer.parseInt(Objects.requireNonNull(_productSold.getText()).toString());
-            int _proCost = Integer.parseInt(Objects.requireNonNull(_productCost.getText()).toString());
+            int _proSold1 = Integer.parseInt(Objects.requireNonNull(_productSold.getText()).toString());
+            int _proCost1 = Integer.parseInt(Objects.requireNonNull(_productCost.getText()).toString());
+            _proSold += _proSold1;
+            _proCost += _proCost1;
 
-            productArrayList.add(new Product(_proName, _proSold, _proCost));
-            dbManager.insertProduct(_proName, transactionId,_proSold, _proCost);
+            productSoldtText.setText(String.valueOf(_proSold));
+            productTotalAmount.setText(_proCost + "/=");
+
+            productArrayList.add(new Product(_proName, _proSold1, _proCost1));
+            dbManager.insertProduct(_proName, transactionId, _proSold1, _proCost1);
             adapter.notifyDataSetChanged();
             recyclerView.setAdapter(adapter);
 
@@ -64,6 +75,8 @@ public class ViewDialog
                 noProductText.setVisibility(View.GONE);
                 fadeInVisible(recyclerView);
             }
+
+
                 _dialog.dismiss();
         });
 
