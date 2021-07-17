@@ -14,7 +14,6 @@ import com.google.android.material.tabs.TabLayout;
 
 public class AuthActivity extends AppCompatActivity
 {
-    private Toolbar toolbar;
     private ViewPager viewPager;
     private TabLayout tabLayout;
 

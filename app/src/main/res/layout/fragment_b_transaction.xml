@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Employee.ETransactionFragment" >
+    tools:context=".Boss.BTransactionFragment" >
 
     <TextView
-        android:id="@+id/e_trans_no_trans_text"
+        android:id="@+id/b_trans_no_trans_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add new transaction"
@@ -16,10 +16,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/e_trans_layout" />
+        app:layout_constraintTop_toBottomOf="@+id/b_trans_layout" />
 
     <FrameLayout
-        android:id="@+id/e_trans_layout"
+        android:id="@+id/b_trans_layout"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
 
 
             <TextView
-                android:id="@+id/e_trans_purchases_text"
+                android:id="@+id/b_trans_purchases_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -41,12 +41,12 @@
                 android:textColor="@color/purple_text"
                 android:textSize="20sp"
                 android:visibility="gone"
-                app:layout_constraintEnd_toStartOf="@+id/e_trans_transaction_text"
-                app:layout_constraintStart_toEndOf="@+id/e_trans_sales_text"
+                app:layout_constraintEnd_toStartOf="@+id/b_trans_transaction_text"
+                app:layout_constraintStart_toEndOf="@+id/b_trans_sales_text"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/e_trans_purchases"
+                android:id="@+id/b_trans_purchases"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -55,11 +55,11 @@
                 android:textSize="16sp"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/e_trans_purchases_text"
-                app:layout_constraintStart_toStartOf="@+id/e_trans_purchases_text" />
+                app:layout_constraintEnd_toEndOf="@+id/b_trans_purchases_text"
+                app:layout_constraintStart_toStartOf="@+id/b_trans_purchases_text" />
 
             <TextView
-                android:id="@+id/e_trans_transaction_text"
+                android:id="@+id/b_trans_transaction_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -72,7 +72,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/e_trans_transaction"
+                android:id="@+id/b_trans_transaction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -80,11 +80,11 @@
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/e_trans_transaction_text"
-                app:layout_constraintStart_toStartOf="@+id/e_trans_transaction_text" />
+                app:layout_constraintEnd_toEndOf="@+id/b_trans_transaction_text"
+                app:layout_constraintStart_toStartOf="@+id/b_trans_transaction_text" />
 
             <TextView
-                android:id="@+id/e_trans_sales_text"
+                android:id="@+id/b_trans_sales_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -97,7 +97,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/e_trans_sales"
+                android:id="@+id/b_trans_sales"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -105,16 +105,16 @@
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/e_trans_sales_text" />
+                app:layout_constraintStart_toStartOf="@+id/b_trans_sales_text" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/e_trans_recyclerview"
+        android:id="@+id/b_trans_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/e_trans_layout" />
+        app:layout_constraintTop_toBottomOf="@+id/b_trans_layout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

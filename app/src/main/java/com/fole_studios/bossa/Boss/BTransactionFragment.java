@@ -1,4 +1,4 @@
-package com.fole_studios.bossa.Employee;
+package com.fole_studios.bossa.Boss;
 
 import android.database.Cursor;
 import android.os.Bundle;
@@ -22,10 +22,10 @@ import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ETransactionFragment#newInstance} factory method to
+ * Use the {@link BTransactionFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ETransactionFragment extends Fragment
+public class BTransactionFragment extends Fragment
 {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -46,7 +46,7 @@ public class ETransactionFragment extends Fragment
     private int _sales;
     private TextView _totalSales;
 
-    public ETransactionFragment()
+    public BTransactionFragment()
     {
         // Required empty public constructor
     }
@@ -57,12 +57,12 @@ public class ETransactionFragment extends Fragment
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ETransactionFragment.
+     * @return A new instance of fragment BTransactionFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ETransactionFragment newInstance(String param1, String param2)
+    public static BTransactionFragment newInstance(String param1, String param2)
     {
-        ETransactionFragment fragment = new ETransactionFragment();
+        BTransactionFragment fragment = new BTransactionFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -85,16 +85,15 @@ public class ETransactionFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        View _view = inflater.inflate(R.layout.fragment_e_transaction, container, false);
+        View _view = inflater.inflate(R.layout.fragment_b_transaction, container, false);
 
-        _recyclerView = _view.findViewById(R.id.e_trans_recyclerview);
-        _noTransactionText = _view.findViewById(R.id.e_trans_no_trans_text);
-        _transactionNum = _view.findViewById(R.id.e_trans_transaction);
-        _totalSales = _view.findViewById(R.id.e_trans_sales);
+        _recyclerView = _view.findViewById(R.id.b_trans_recyclerview);
+        _noTransactionText = _view.findViewById(R.id.b_trans_no_trans_text);
+        _transactionNum = _view.findViewById(R.id.b_trans_transaction);
+        _totalSales = _view.findViewById(R.id.b_trans_sales);
 
         initDatabase();
         initRecyclerview();
-
 
         return _view;
     }
@@ -142,5 +141,7 @@ public class ETransactionFragment extends Fragment
 
             _totalSales.setText(_sales + "/=");
         }
+
     }
+
 }
