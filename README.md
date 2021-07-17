@@ -10,7 +10,9 @@ The project was developed during this hacksthon basing on the challenge theme (S
 ### Deployment
 * Clone the project using control version in android studio
 * Navigate to background.beem open the OTP file
-* Change the API_KEY and SECRET_KEY.
-* The keys can be generated from Beem Africa's site
+* Change the ```API_KEY``` and ```SECRET_KEY```.
+* The keys can be generated from [Beem Africa's](https://login.beem.africa/?client_id=africa.beem.otp#!/) site.
 
-NB: Using local database for testing purpose.
+NOTE: 
+* Using local database for testing purpose.
+* Currently, the app contains my personal keys. But after challenge's assessment (19th July 2021) they will be removed.
