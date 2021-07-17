@@ -43,6 +43,8 @@ public class ETransactionFragment extends Fragment
     private Cursor _cursorTransaction;
     private TextView _noTransactionText;
     private TextView _transactionNum;
+    private int _sales;
+    private TextView _totalSales;
 
     public ETransactionFragment()
     {
@@ -88,6 +90,7 @@ public class ETransactionFragment extends Fragment
         _recyclerView = _view.findViewById(R.id.e_trans_recyclerview);
         _noTransactionText = _view.findViewById(R.id.e_trans_no_trans_text);
         _transactionNum = _view.findViewById(R.id.e_trans_transaction);
+        _totalSales = _view.findViewById(R.id.e_trans_sales);
 
         initDatabase();
         initRecyclerview();
@@ -106,7 +109,7 @@ public class ETransactionFragment extends Fragment
     private void initRecyclerview()
     {
         transactionData();
-        _adapter = new TransactionAdapter(_transactionArrayList, getContext());
+        _adapter = new TransactionAdapter(_transactionArrayList, _dbManager, getContext());
         _recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         _recyclerView.setAdapter(_adapter);
         _adapter.notifyDataSetChanged();
@@ -131,10 +134,13 @@ public class ETransactionFragment extends Fragment
         {
             do
             {
-                _cursorTransaction.getString(Integer.parseInt(_cursorTransaction.getString(0)));
-                _cursorTransaction.getString(3);
-                _transactionArrayList.add(new Transaction(_cursorTransaction.getString(Integer.parseInt(_cursorTransaction.getString(0))), _cursorTransaction.getString(3)));
+                String _transactionId = _cursorTransaction.getString(0);
+                String _transactionconfirm = _cursorTransaction.getString(3);
+                _sales += Integer.parseInt(_cursorTransaction.getString(1));
+                _transactionArrayList.add(new Transaction(_transactionId, _transactionconfirm));
             }while(_cursorTransaction.moveToNext());
+
+            _totalSales.setText(_sales + "/=");
         }
     }
 }

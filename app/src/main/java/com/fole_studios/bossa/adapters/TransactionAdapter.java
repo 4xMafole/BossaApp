@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fole_studios.bossa.R;
 import com.fole_studios.bossa.custom.ViewDialog;
+import com.fole_studios.bossa.database.DBManager;
 import com.fole_studios.bossa.models.Transaction;
 
 import java.util.ArrayList;
@@ -20,11 +21,13 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 {
     private ArrayList<Transaction> _transactionArrayList;
     private Context _context;
+    private DBManager _dbManager;
 
-    public TransactionAdapter(ArrayList<Transaction> transactionArrayList, Context context)
+    public TransactionAdapter(ArrayList<Transaction> transactionArrayList, DBManager dbManager, Context context)
     {
         _transactionArrayList = transactionArrayList;
         _context = context;
+        _dbManager = dbManager;
     }
 
     @NonNull
@@ -67,7 +70,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         holder._transactionContainer.setOnClickListener(view ->
         {
             ViewDialog _dialog = new ViewDialog();
-            _dialog.showTransaction(_context, transactionID);
+            _dialog.showTransaction(_context, _dbManager, transactionID);
         });
     }
 

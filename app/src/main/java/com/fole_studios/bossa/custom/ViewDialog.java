@@ -2,6 +2,7 @@ package com.fole_studios.bossa.custom;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.database.Cursor;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,7 +70,7 @@ public class ViewDialog
         endDialog();
     }
 
-    public void showTransaction(Context context, String transactionID)
+    public void showTransaction(Context context, DBManager dbManager, String transactionID)
     {
         startDialog(context, R.layout.transaction_popup);
 
@@ -77,6 +78,32 @@ public class ViewDialog
         RecyclerView _recyclerView = _dialog.findViewById(R.id.popup_recyclerview);
         TextView _totalSold = _dialog.findViewById(R.id.popup_total_sold);
         TextView _transAmount = _dialog.findViewById(R.id.popup_amount);
+
+        Cursor _cursor = dbManager.fetchLatestProducts(Integer.parseInt(transactionID));
+        int _sold = 0, _amount = 0;
+
+        _transID.setText("Transaction: " + transactionID);
+
+        ArrayList<Product> _productArrayList = new ArrayList<>();
+
+        if(_cursor.getCount() > 0)
+        {
+            do
+            {
+                _productArrayList.add(new Product(_cursor.getString(2), Integer.parseInt(_cursor.getString(3)), Integer.parseInt(_cursor.getString(4))));
+//                _dbManager.delete(Long.parseLong(_cursor.getString(0)));
+                _sold += Integer.parseInt(_cursor.getString(3));
+                _amount += Integer.parseInt(_cursor.getString(4));
+
+            }while(_cursor.moveToNext());
+
+            _totalSold.setText(String.valueOf(_sold));
+            _transAmount.setText(_amount + "/=");
+        }
+
+        ProductAdapter _adapter = new ProductAdapter(_productArrayList, context);
+        _recyclerView.setAdapter(_adapter);
+        _adapter.notifyDataSetChanged();
 
 
         endDialog();
